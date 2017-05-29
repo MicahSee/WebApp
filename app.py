@@ -26,19 +26,19 @@ def signuppg():
 @app.route('/signUp', methods=['POST'])
 def signUp():
     name = request.form['inputName']
-    email = request.form['inputEmail']
+    username = request.form['inputUsername']
     password = request.form['inputPassword']
     #print(password+hashpass, file=sys.stderr)
-    if name and email and password:
+    if name and username and password:
         firebase = pyrebase.initialize_app(config)
         auth = firebase.auth()
         user = auth.sign_in_with_email_and_password("exploretheworldofdell@gmail.com","7428Micah1711")
         db = firebase.database()
         data = db.child('webusers').get(user['idToken']).val()
-        if email not in data:
+        if username not in data:
             hashpass = generate_password_hash(password)
-            userdata = {'name':name,'email':email,'password':hashpass}
-            db.child("webusers").child(email).push(userdata, user['idToken'])
+            userdata = {'name':name,'username':username,'password':hashpass}
+            db.child("webusers").child(username).put(userdata, user['idToken'])
             return json.dumps({'html':'<span>User created successfully</span>'})
         else:
             return json.dumps({'html':'<span>User already exists</span>'})
@@ -56,4 +56,4 @@ def signUp():
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(debug=True, port=80)
