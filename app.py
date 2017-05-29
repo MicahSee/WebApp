@@ -38,7 +38,7 @@ def signUp():
         if username not in data:
             hashpass = generate_password_hash(password)
             userdata = {'name':name,'username':username,'password':hashpass}
-            db.child("webusers").child(username).put(userdata, user['idToken'])
+            db.child("webusers").child(username).set(userdata, user['idToken'])
             return json.dumps({'html':'<span>User created successfully</span>'})
         else:
             return json.dumps({'html':'<span>User already exists</span>'})
