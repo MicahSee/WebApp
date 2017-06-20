@@ -6,14 +6,7 @@ import pyrebase
 app = Flask(__name__)
 
 #beginning of firebase connection
-config = {
-"apiKey": "AIzaSyCDtC3dadmA_zOjmgfJPrCPYmKi9SNSBbg",
-"authDomain": "nexthorizon-9094f.firebaseapp.com",
-"databaseURL": "https://nexthorizon-9094f.firebaseio.com",
-"projectId": "nexthorizon-9094f",
-"storageBucket": "nexthorizon-9094f.appspot.com",
-"messagingSenderId": "330406784555"
-}
+config = {}
 
 @app.route("/")
 def mainpg():
